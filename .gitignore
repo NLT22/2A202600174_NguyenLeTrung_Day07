@@ -18,3 +18,4 @@ __pycache__/
 .venv/
 venv
 src_w_solution/
+message.txt
