@@ -32,6 +32,8 @@ pip install -r requirements.txt
 pytest tests/ -v          # Phần lớn tests sẽ FAIL (chưa implement)
 ```
 
+Windows note: in Git Bash, `python3` may resolve to a different interpreter than the activated `venv`. Prefer `python -m pip ...` and verify with the same `python` executable that will run your snippet.
+
 Mặc định, lab vẫn chạy với `_mock_embed` nên **không bắt buộc** cài embedder thật.
 File `.env` được tự động nạp khi chạy `main.py`. Với các Python snippet chạy trực tiếp, hãy `export` biến môi trường cần thiết hoặc gọi `load_dotenv()` nếu cần.
 
@@ -47,8 +49,8 @@ pip install -r requirements.txt
 ### 2) Tùy chọn: Local embedder `all-MiniLM-L6-v2`
 
 ```bash
-pip install sentence-transformers
-python3 - <<'PY'
+python -m pip install sentence-transformers
+python - <<'PY'
 from src import LocalEmbedder
 embedder = LocalEmbedder()
 print(embedder._backend_name)
@@ -62,9 +64,9 @@ PY
 ### 3) Tùy chọn: OpenAI embedder
 
 ```bash
-pip install openai
+python -m pip install openai
 export OPENAI_API_KEY=your-key-here
-python3 - <<'PY'
+python - <<'PY'
 from src import OpenAIEmbedder
 embedder = OpenAIEmbedder()
 print(embedder._backend_name)
@@ -92,7 +94,7 @@ Sau khi cài optional dependencies, có thể verify từng backend riêng:
 **Verify local embedder**
 
 ```bash
-python3 - <<'PY'
+python - <<'PY'
 from src import LocalEmbedder
 
 embedder = LocalEmbedder()
@@ -103,7 +105,7 @@ PY
 **Verify OpenAI embedder**
 
 ```bash
-python3 - <<'PY'
+python - <<'PY'
 from pathlib import Path
 from dotenv import load_dotenv
 from src import OpenAIEmbedder

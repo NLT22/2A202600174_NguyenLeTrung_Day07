@@ -30,7 +30,16 @@ class LocalEmbedder:
     """Sentence Transformers-backed local embedder."""
 
     def __init__(self, model_name: str = LOCAL_EMBEDDING_MODEL) -> None:
-        from sentence_transformers import SentenceTransformer
+        try:
+            from sentence_transformers import SentenceTransformer
+        except ModuleNotFoundError as exc:
+            raise ModuleNotFoundError(
+                "LocalEmbedder requires the optional package 'sentence-transformers'. "
+                "Install it into the same interpreter that runs this script, for example: "
+                "`python -m pip install sentence-transformers`. "
+                "If you already installed it in a virtual environment, make sure you are "
+                "using that environment's Python executable."
+            ) from exc
 
         self.model_name = model_name
         self._backend_name = model_name

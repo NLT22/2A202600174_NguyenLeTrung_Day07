@@ -220,12 +220,12 @@ class TestKnowledgeBaseAgent(unittest.TestCase):
     def test_answer_returns_string(self):
         agent = self._make_agent()
         result = agent.answer("What is Python?")
-        self.assertIsInstance(result, str)
+        self.assertIsInstance(result["answer"], str)
 
     def test_answer_non_empty(self):
         agent = self._make_agent()
         result = agent.answer("What is machine learning?")
-        self.assertGreater(len(result), 0)
+        self.assertGreater(len(result["answer"]), 0)
 
 
 class TestComputeSimilarity(unittest.TestCase):
